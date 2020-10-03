@@ -1,0 +1,99 @@
+﻿@page
+@model Product.Web.UI.Pages.ProductModel
+@{
+    ViewData["Title"] = "Product";
+}
+
+<style>
+    .div-table {
+        display: table;
+        width: auto;
+        background-color: #eee;
+        border: 1px solid #666666;
+        border-spacing: 5px;
+    }
+
+    .div-table-row {
+        display: table-row;
+        width: auto;
+        clear: both;
+    }
+
+    .div-table-col {
+        float: left;
+        display: table-column;
+        width: 200px;
+        background-color: #ccc;
+    }
+
+    .div-table-col-header {
+        float: left;
+        display: table-column;
+        font-weight: bold;
+        width: 200px;
+        background-color: #add8e6;
+    }
+
+    .div-error-message {
+        background-color: #fce4e4;
+        border: 1px solid #fcc2c3;
+        float: left;
+        padding: 20px 30px;
+    }
+
+    .error-text {
+        color: #cc0033;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 20px;
+        text-shadow: 1px 1px rgba(250,250,250,.3);
+    }
+</style>
+
+<body>
+    <form id="form1">
+
+        @{
+            if (String.IsNullOrEmpty(Model.errorMessage))
+            {
+                <h1>Here are the list of products :</h1>
+
+                <div class="div-table">
+                    @{
+                        if (Model.listOfProducts != null && Model.listOfProducts.Count() > 0)
+                        {
+
+                            <div class="div-table-row">
+                                <div class="div-table-col-header">Id</div>
+                                <div class="div-table-col-header">Name</div>
+                                <div class="div-table-col-header">Price</div>
+                            </div>
+
+                            foreach (var modelItem in Model.listOfProducts)
+                            {
+                                <div class="div-table-row">
+                                    <div class="div-table-col">
+                                        @modelItem.Id<br />
+                                    </div>
+                                    <div class="div-table-col">
+                                        @modelItem.Name<br />
+                                    </div>
+                                    <div class="div-table-col">
+                                        @modelItem.Price<br />
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="div-error-message">
+                    <span class="error-text">@Model.errorMessage</span>
+                </div>
+            }
+        }
+    </form>
+</body>
